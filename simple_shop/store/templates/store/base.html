@@ -1,33 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+{% load static %}
 <head>
-    <title>{% block title %}My Simple Shop{% endblock %}</title>
-    <style>
-        body { font-family: sans-serif; margin: 20px; }
-        nav { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        nav a { margin-right: 15px; text-decoration: none; }
-        .product { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; width: 200px; float: left; margin-right: 10px;}
-        .product img { max-width: 100%; height: auto; }
-        .errorlist { color: red; }
-    </style>
+    <meta charset="UTF-8">
+    <title>{% block title %}FERREMAS - Tu ferretería de confianza{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" href="base.css">
 </head>
 <body>
-    <nav>
-        <a href="{% url 'product_list' %}">Home</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'add_product' %}">Add Product</a>
-            <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-            <span>Hi {{ user.username }}!</span>
-        {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'signup' %}">Sign Up</a>
-        {% endif %}
+    <nav class="navbar navbar-expand-md sticky-top shadow-sm bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'product_list' %}">
+                <img src="{% static 'imagenes/logo.png' %}" alt="FERREMAS logo" width="40" height="40" class="me-2">
+                <span class="fw-bold text-danger">FERREMAS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'add_product' %}">Añadir Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+                <div class="d-flex align-items-center ms-auto">
+                    {% if user.is_authenticated %}
+                        <span class="me-3 text-secondary">Hola, {{ user.username }}!</span>
+                        <form action="{% url 'logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar Sesión</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm me-2">Iniciar sesión</a>
+                        <a href="{% url 'signup' %}" class="btn btn-primary btn-sm">Regístrate</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </nav>
-    <div class="content">
+    <main class="container mt-4">
         {% block content %}{% endblock %}
-    </div>
+    </main>
+    <footer class="mt-5 p-4 text-center bg-dark text-white">
+        <p>&copy; 2025 FERREMAS - Todos los derechos reservados</p>
+        <p>Álvarez 2336, Viña del Mar | +56 9 XXXX XXXX | contacto@ferremas.cl</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

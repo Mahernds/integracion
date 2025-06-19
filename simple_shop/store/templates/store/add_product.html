@@ -1,12 +1,12 @@
 {% extends 'store/base.html' %}
 
-{% block title %}Add Product - {{ block.super }}{% endblock %}
+{% block title %}Agregar Producto - {{ block.super }}{% endblock %}
 
 {% block content %}
-<h2>Add New Product</h2>
+<h2>Añadir nuevo producto</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Add Product</button>
+    <button type="submit">Añadir</button>
 </form>
 {% endblock %}

@@ -3,10 +3,10 @@
 {% block title %}Sign Up - {{ block.super }}{% endblock %}
 
 {% block content %}
-<h2>Sign Up</h2>
+<h2>Registrate</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Sign Up</button>
+    <button type="submit">Registrarse</button>
 </form>
 {% endblock %}

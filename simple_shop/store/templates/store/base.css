@@ -1,0 +1,71 @@
+:root {
+  --ferremas-rojo: #c62828;
+  --ferremas-gris: #424242;
+  --ferremas-amarillo: #ffeb3b;
+  --ferremas-fondo: #f9f9f9;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--ferremas-fondo);
+  color: var(--ferremas-gris);
+}
+
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.nav-link {
+  font-weight: bold;
+  color: var(--ferremas-gris) !important;
+}
+
+.nav-link:hover {
+  color: var(--ferremas-rojo) !important;
+}
+
+.fw-bold.text-danger {
+  color: var(--ferremas-rojo) !important;
+}
+
+footer {
+  background-color: var(--ferremas-gris);
+  color: white;
+}
+
+.btn-primary {
+  background-color: var(--ferremas-rojo);
+  border: none;
+}
+
+.btn-primary:hover, .btn-outline-danger:hover {
+  background-color: #b71c1c;
+  color: #fff;
+}
+
+.btn-outline-primary {
+  border-color: var(--ferremas-rojo);
+  color: var(--ferremas-rojo);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--ferremas-rojo);
+  color: #fff;
+  border-color: var(--ferremas-rojo);
+}
+
+.btn-outline-danger {
+  border-color: var(--ferremas-rojo);
+  color: var(--ferremas-rojo);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--ferremas-rojo);
+  color: #fff;
+  border-color: var(--ferremas-rojo);
+}
