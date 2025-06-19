@@ -1,0 +1,74 @@
+/* Estilos para login y registro */
+.auth-form-container {
+  max-width: 400px;
+  margin: 40px auto 0 auto;
+  padding: 2.5rem 2rem 2rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(66, 42, 42, 0.08), 0 1.5px 8px rgba(198,40,40,0.10);
+}
+
+.auth-form-container h2 {
+  text-align: center;
+  color: var(--ferremas-rojo, #c62828);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-form-container label {
+  font-weight: bold;
+  color: var(--ferremas-gris, #424242);
+}
+
+.auth-form-container input[type="text"],
+.auth-form-container input[type="password"],
+.auth-form-container input[type="email"] {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: border 0.2s;
+}
+
+.auth-form-container input:focus {
+  border: 1.5px solid var(--ferremas-rojo, #c62828);
+  outline: none;
+  background: #fff;
+}
+
+.auth-form-container button[type="submit"] {
+  background: var(--ferremas-rojo, #c62828);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.auth-form-container button[type="submit"]:hover {
+  background: #b71c1c;
+}
+
+.auth-form-container .errorlist,
+.auth-form-container .errorlist li,
+.auth-form-container .errorlist p {
+  color: #b71c1c;
+  background: #ffeaea;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+  list-style: none;
+}

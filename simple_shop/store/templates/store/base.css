@@ -69,3 +69,21 @@ footer {
   color: #fff;
   border-color: var(--ferremas-rojo);
 }
+
+.product-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  background: #eee;
+}
+
+.custom-login-alert {
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #fff3cd 0%, #ffeeba 100%);
+  border: 2px solid #ffe082;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(198,40,40,0.08);
+  color: #856404;
+}

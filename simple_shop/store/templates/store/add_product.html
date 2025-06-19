@@ -4,9 +4,16 @@
 
 {% block content %}
 <h2>Añadir nuevo producto</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Añadir</button>
-</form>
+
+{% if must_login %}
+  <div class="alert alert-warning text-center custom-login-alert" role="alert">
+    <strong>¡Atención!</strong> Debes <a href="{% url 'login' %}" class="alert-link">iniciar sesión</a> para añadir productos.
+  </div>
+{% else %}
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Añadir</button>
+  </form>
+{% endif %}
 {% endblock %}

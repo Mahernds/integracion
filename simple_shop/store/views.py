@@ -23,6 +23,8 @@ def signup(request):
 
 @login_required
 def add_product(request):
+    if not request.user.is_authenticated:
+        return render(request, 'store/add_product.html', {'must_login': True})
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
