@@ -5,18 +5,40 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'bootstrap-5.3.3/css/product_list.css' %}">
+<script>
+  function agregarAlCarrito(id, nombre, precio) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let index = carrito.findIndex(item => item.id === id);
+    if (index !== -1) {
+      carrito[index].cantidad += 1;
+    } else {
+      carrito.push({
+        id: id,
+        nombre: nombre,
+        precio: parseInt(precio),
+        cantidad: 1
+      });
+    }
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    alert(nombre + " fue añadido al carrito");
+  }
+</script>
 {% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Productos</h2>
-<div class="row">
+<h2 class="mb-4 text-center fw-bold text-danger">Productos</h2>
+<div class="row justify-content-center">
   {% for product in products %}
     <div class="col-md-3 mb-4">
-      <div class="card h-100">
-        <img src="{{ product.photo_url }}" class="card-img-top product-img" alt="{{ product.nombre }}">
-        <div class="card-body">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ product.photo_url }}" class="card-img-top product-img" alt="{{ product.nombre }}" style="height: 180px; object-fit: contain;">
+        <div class="card-body text-center">
           <h5 class="card-title">{{ product.nombre }}</h5>
-          <p class="card-text">${{ product.price }}</p>
+          <p class="card-text fw-semibold text-primary">${{ product.price }}</p>
+          <button class="btn btn-outline-success w-100"
+                  onclick="agregarAlCarrito('{{ product.id }}', '{{ product.nombre }}', '{{ product.price }}')">
+            🛒 Añadir al carrito
+          </button>
         </div>
       </div>
     </div>
