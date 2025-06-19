@@ -1,4 +1,5 @@
 # store/views.py
+# store/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login # Added login import
@@ -37,3 +38,6 @@ def add_product(request):
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'store/product_list.html', {'products': products})
+
+def carrito(request):
+    return render(request, 'store/carrito.html')
