@@ -1,0 +1,57 @@
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+h2.mb-4 {
+  color: #4f46e5;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2.5rem !important;
+}
+.card {
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(60, 72, 88, 0.13);
+  transition: transform 0.15s, box-shadow 0.15s;
+  background: #fff;
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(99, 102, 241, 0.13);
+}
+.card-img-top.product-img {
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background: #f1f5f9;
+}
+.card-title {
+  color: #374151;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-bottom: 0.7rem;
+}
+.card-text {
+  color: #6366f1;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.alert-info {
+  background: #e0e7ff;
+  color: #3730a3;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+@media (max-width: 767px) {
+  .card-img-top.product-img {
+    height: 140px;
+  }
+  h2.mb-4 {
+    font-size: 1.3rem;
+  }
+}

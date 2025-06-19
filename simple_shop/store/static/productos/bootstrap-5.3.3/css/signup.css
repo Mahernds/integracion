@@ -1,0 +1,88 @@
+
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+.auth-form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(60, 72, 88, 0.15);
+  padding: 2.5rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.7s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.auth-form-container h2 {
+  margin-bottom: 1.5rem;
+  color: #4f46e5;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.auth-form-container form {
+  width: 100%;
+}
+.auth-form-container .mb-3 {
+  margin-bottom: 1.2rem;
+}
+.auth-form-container label {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.auth-form-container input[type="text"],
+.auth-form-container input[type="email"],
+.auth-form-container input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: #f1f5f9;
+  font-size: 1rem;
+  transition: border 0.2s;
+  margin-top: 0.2rem;
+}
+.auth-form-container input:focus {
+  border-color: #6366f1;
+  outline: none;
+  background: #fff;
+}
+.auth-form-container .errorlist {
+  color: #dc2626;
+  background: #fee2e2;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+}
+.auth-form-container small.form-text {
+  color: #64748b;
+  font-size: 0.92rem;
+  margin-top: 0.2rem;
+  display: block;
+}
+.auth-form-container button[type="submit"] {
+  width: 100%;
+  background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  transition: background 0.2s, transform 0.1s;
+}
+.auth-form-container button[type="submit"]:hover {
+  background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
+  transform: translateY(-2px) scale(1.02);
+}
