@@ -1,9 +1,9 @@
 body {
-  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  background: linear-gradient(135deg, #bcbcbd 0%, #e0e7ff 100%);
   min-height: 100vh;
 }
 h2.mb-4 {
-  color: #4f46e5;
+  color: #bb4343;
   font-weight: 700;
   letter-spacing: 1px;
   text-align: center;
@@ -41,7 +41,7 @@ h2.mb-4 {
 }
 .alert-info {
   background: #e0e7ff;
-  color: #3730a3;
+  color: #a33030;
   border: none;
   border-radius: 10px;
   font-size: 1.1rem;
