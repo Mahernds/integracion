@@ -9,4 +9,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='store/login.html'), name='login'),
     path('logout/', LogoutView.as_view(next_page='product_list'), name='logout'),
     path('add_product/', views.add_product, name='add_product'),
+    path('bodeguero/', views.bodeguero_dashboard, name='bodeguero_dashboard'),
+
 ]

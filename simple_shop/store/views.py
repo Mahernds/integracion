@@ -37,3 +37,26 @@ def add_product(request):
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'store/product_list.html', {'products': products})
+
+@login_required
+def bodeguero_dashboard(request):
+    if not request.user.is_staff:
+        return redirect('product_list')
+    if request.method == "POST":
+        if "delete_product" in request.POST:
+            product_id = request.POST.get("product_id")
+            if product_id:
+                Product.objects.filter(id=product_id).delete()
+        else:
+            product_id = request.POST.get("product_id")
+            new_stock = request.POST.get("new_stock")
+            if product_id and new_stock is not None:
+                try:
+                    product = Product.objects.get(id=product_id)
+                    product.stock = int(new_stock)
+                    product.save()
+                except (Product.DoesNotExist, ValueError):
+                    pass
+        return redirect('bodeguero_dashboard')
+    products = Product.objects.all()
+    return render(request, 'store/bodeguero_dashboard.html', {'products': products})

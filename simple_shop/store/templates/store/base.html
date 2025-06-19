@@ -29,6 +29,9 @@
                 </ul>
                 <div class="d-flex align-items-center ms-auto">
                     {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            <a href="{% url 'bodeguero_dashboard' %}" class="btn btn-warning btn-sm me-3">Panel Bodeguero</a>
+                        {% endif %}
                         <span class="me-3 text-secondary">Hola, {{ user.username }}!</span>
                         <form action="{% url 'logout' %}" method="post" class="d-inline">
                             {% csrf_token %}

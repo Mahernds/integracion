@@ -11,7 +11,7 @@
         <img src="{{ product.photo_url }}" class="card-img-top product-img" alt="{{ product.nombre }}">
         <div class="card-body">
           <h5 class="card-title">{{ product.nombre }}</h5>
-          <p class="card-text">${{ product.price }}</p>
+          <p class="card-text">${{ product.price|floatformat:0 }}</p>
         </div>
       </div>
     </div>
