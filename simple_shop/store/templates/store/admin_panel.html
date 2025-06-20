@@ -1,0 +1,113 @@
+{% extends 'store/base.html' %}
+{% block title %}Panel de Administración{% endblock %}
+
+{% block extra_head %}
+<style>
+.form-admin-user {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px 20px;
+    box-shadow: 0 2px 8px #0001;
+    margin-bottom: 30px;
+}
+.table-users th, .table-users td {
+    vertical-align: middle !important;
+}
+.btn-edit { color: #fff; background: #007bff; border: none; }
+.btn-delete { color: #fff; background: #dc3545; border: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Panel de Administración</h2>
+  {% if mensaje %}
+    <div class="alert alert-success">{{ mensaje }}</div>
+  {% endif %}
+  <div class="row">
+    <div class="col-md-6">
+      <h4>{% if edit_user %}Editar usuario{% else %}Crear nuevo usuario{% endif %}</h4>
+      <div class="form-admin-user">
+        <form method="post" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+          </div>
+          <div class="mb-3">
+            {{ form.role.label_tag }}
+            {{ form.role }}
+          </div>
+          <div class="mb-3">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+            {% if form.password1.help_text %}
+              <div class="form-text text-muted">{{ form.password1.help_text|safe }}</div>
+            {% endif %}
+          </div>
+          <div class="mb-3">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+          </div>
+          {% if edit_user %}
+            <button type="submit" name="save_edit" value="{{ edit_user.id }}" class="btn btn-success">Guardar cambios</button>
+            <a href="{% url 'admin_panel' %}" class="btn btn-secondary">Cancelar</a>
+          {% else %}
+            <button type="submit" class="btn btn-primary">Crear usuario</button>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Usuarios registrados</h4>
+      <table class="table table-bordered table-users">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Fecha de registro</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              {% if user.is_superuser %}
+                <span class="badge bg-danger">Admin</span>
+              {% elif user.is_staff %}
+                <span class="badge bg-warning text-dark">Bodeguero</span>
+              {% else %}
+                <span class="badge bg-secondary">Usuario</span>
+              {% endif %}
+            </td>
+            <td>{{ user.date_joined|date:"d/m/Y H:i" }}</td>
+            <td>
+              {% if not user.is_superuser %}
+              <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" name="edit_user" value="{{ user.id }}" class="btn btn-sm btn-edit">Editar</button>
+              </form>
+              <form method="post" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                {% csrf_token %}
+                <button type="submit" name="delete_user" value="{{ user.id }}" class="btn btn-sm btn-delete">Eliminar</button>
+              </form>
+              {% else %}
+                <span class="text-muted">-</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

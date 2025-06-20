@@ -20,9 +20,29 @@ document.addEventListener("DOMContentLoaded", function () {
                         },
                         onApprove: function(data, actions) {
                             return actions.order.capture().then(function(detalles) {
-                                alert('¡Pago realizado con éxito!');
-                                localStorage.removeItem('carrito');
-                                window.location.reload();
+                                // Recoge los datos del formulario
+                                const datosEnvio = {
+                                    nombre: document.getElementById('nombre').value,
+                                    correo: document.getElementById('correo').value,
+                                    telefono: document.getElementById('telefono').value,
+                                    region: document.getElementById('region').value,
+                                    comuna: document.getElementById('comuna').value,
+                                    direccion: document.getElementById('direccion').value,
+                                    total: document.getElementById('carrito-total').textContent,
+                                    items: JSON.parse(localStorage.getItem('carrito') || '[]')
+                                };
+                                fetch('/registrar-compra/', {
+                                    method: 'POST',
+                                    credentials: 'same-origin',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRFToken': (document.querySelector('[name=csrfmiddlewaretoken]') || {}).value
+                                    },
+                                    body: JSON.stringify(datosEnvio)
+                                }).then(() => {
+                                    localStorage.removeItem('carrito');
+                                    window.location.href = "/perfil/";
+                                });
                             });
                         },
                         onCancel: function(data) {
