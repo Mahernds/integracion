@@ -1,0 +1,114 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Carrito de Compras - {{ block.super }}{% endblock %}
+
+{% block extra_head %}
+<script src="{% static 'scripts/carrito.js' %}"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AS8Na8w_DNRPt8CHQpKhHh_qIKKMXaAQ7Q27xRG-aACy2D7ZyxKQB6I9QsiDvBPxMrsJ_cH3r-ayMmWp&currency=USD"></script>
+<script src="{% static 'store/scripts/contadorCarrito.js' %}"></script>
+<script src="{% static 'store/scripts/paypal_carrito.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main class="container mt-4">
+  <h1>Carrito de Compras</h1>
+  <div id="carrito-vacio" class="alert alert-info mt-3" style="display:none;">
+    Tu carrito está vacío.
+  </div>
+  <div id="carrito-contenido" style="display:none;">
+    <table class="table table-bordered align-middle">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody id="carrito-items"></tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+      <h4>Total: $<span id="carrito-total">0</span></h4>
+    </div>
+    <!-- Formulario de envío -->
+    <div class="mt-5">
+      <h4>Información de envío</h4>
+      <form id="form-envio" class="row g-3 needs-validation" novalidate>
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre completo</label>
+          <input type="text" class="form-control" id="nombre" required>
+        </div>
+        <div class="col-md-6">
+          <label for="correo" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="correo" required>
+        </div>
+        <div class="col-md-6">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" id="telefono" required maxlength="9" pattern="[0-9]{9}"
+            inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Ej: 912345678">
+          <div class="invalid-feedback">Debe ingresar solo 9 dígitos numéricos.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="region" class="form-label">Región</label>
+          <select id="region" class="form-select" required>
+            <option value="">Seleccione una región</option>
+          </select>
+          <div class="invalid-feedback">Seleccione una región.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="comuna" class="form-label">Comuna</label>
+          <select id="comuna" class="form-select" required>
+            <option value="">Seleccione una comuna</option>
+          </select>
+          <div class="invalid-feedback">Seleccione una comuna.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" required>
+          <div class="invalid-feedback">Ingrese su dirección completa.</div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Continuar con el pago</button>
+        </div>
+      </form>
+      <div id="paypal-button-container" class="mt-4" style="display: none;"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const regiones = {
+        "Región Metropolitana": ["Santiago", "Puente Alto", "Maipú"],
+        "Valparaíso": ["Valparaíso", "Viña del Mar", "Quilpué"],
+        "Biobío": ["Concepción", "Talcahuano", "Los Ángeles"]
+    };
+
+    const regionSelect = document.getElementById('region');
+    const comunaSelect = document.getElementById('comuna');
+
+    if (regionSelect && comunaSelect) {
+        Object.keys(regiones).forEach(region => {
+            const opt = document.createElement('option');
+            opt.value = region;
+            opt.textContent = region;
+            regionSelect.appendChild(opt);
+        });
+
+        regionSelect.addEventListener('change', function() {
+            comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+            if (regiones[this.value]) {
+                regiones[this.value].forEach(comuna => {
+                    const opt = document.createElement('option');
+                    opt.value = comuna;
+                    opt.textContent = comuna;
+                    comunaSelect.appendChild(opt);
+                });
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

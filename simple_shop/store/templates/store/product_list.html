@@ -9,9 +9,16 @@
     <div class="col-md-3 mb-4">
       <div class="card h-100">
         <img src="{{ product.photo_url }}" class="card-img-top product-img" alt="{{ product.nombre }}">
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ product.nombre }}</h5>
-          <p class="card-text">${{ product.price|floatformat:0 }}</p>
+          <p class="card-text mb-2">${{ product.price|floatformat:0 }}</p>
+          <button class="btn btn-danger btn-sm mt-auto agregar-carrito-btn w-100"
+                  data-id="{{ product.id }}"
+                  data-nombre="{{ product.nombre }}"
+                  data-precio="{{ product.price|floatformat:0 }}"
+                  data-imagen="{{ product.photo_url }}">
+            Agregar al carrito
+          </button>
         </div>
       </div>
     </div>

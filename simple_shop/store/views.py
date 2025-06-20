@@ -60,3 +60,6 @@ def bodeguero_dashboard(request):
         return redirect('bodeguero_dashboard')
     products = Product.objects.all()
     return render(request, 'store/bodeguero_dashboard.html', {'products': products})
+
+def carrito(request):
+    return render(request, 'store/carrito.html')
