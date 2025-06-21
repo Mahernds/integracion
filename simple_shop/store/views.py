@@ -49,5 +49,5 @@ def es_bodeguero(user):
 
 @user_passes_test(es_bodeguero)
 def vista_bodeguero(request):
-    # Aquí va la lógica para organizar inventario, etc.
-    return render(request, 'store/bodega.html')
+    productos = Product.objects.all()
+    return render(request, 'store/bodega.html', {'productos': productos})

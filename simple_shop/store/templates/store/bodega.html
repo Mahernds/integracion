@@ -1,7 +1,50 @@
-{% extends 'store/base.html' %}
-{% block title %}Panel Bodeguero - {{ block.super }}{% endblock %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'bootstrap-5.3.3/css/bodega.css' %}">
+{% endblock %}
+
 {% block content %}
 <h2>Panel del Bodeguero</h2>
 <p>Bienvenido, aquí puedes organizar y mantener el inventario.</p>
-<!-- Aquí puedes listar productos, editar cantidades, etc. -->
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+            <th>URL de la foto</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.name }}</td>
+            <td>${{ producto.price }}</td>
+            <td>
+                {% if producto.image_url %}
+                    <img src="{{ producto.image_url }}" alt="{{ producto.name }}" style="max-width:60px; max-height:60px;">
+                {% else %}
+                    Sin imagen
+                {% endif %}
+            </td>
+            <td>
+                {% if producto.image_url %}
+                    <a href="{{ producto.image_url }}" target="_blank">Ver imagen</a>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>{{ producto.stock }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay productos en inventario.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
