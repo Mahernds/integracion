@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='product_list'), name='logout'),
     path('add_product/', views.add_product, name='add_product'),
     path('carrito/', views.carrito, name='carrito'),
+    path('bodega/', views.vista_bodeguero, name='bodega'),
 ]

@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login # Added login import
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import Product
 from .forms import ProductForm
@@ -41,3 +41,13 @@ def product_list(request):
 
 def carrito(request):
     return render(request, 'store/carrito.html')
+
+
+#bodeguero view
+def es_bodeguero(user):
+    return user.groups.filter(name='Bodeguero').exists()
+
+@user_passes_test(es_bodeguero)
+def vista_bodeguero(request):
+    # Aquí va la lógica para organizar inventario, etc.
+    return render(request, 'store/bodega.html')
