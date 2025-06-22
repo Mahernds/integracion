@@ -25,20 +25,20 @@
             <td>{{ producto.name }}</td>
             <td>${{ producto.price }}</td>
             <td>
-                {% if producto.image_url %}
-                    <img src="{{ producto.image_url }}" alt="{{ producto.name }}" style="max-width:60px; max-height:60px;">
+                {% if producto.photo_url %}
+                    <img src="{{ producto.photo_url }}" alt="{{ producto.nombre }}" style="max-width:60px; max-height:60px;">
                 {% else %}
                     Sin imagen
                 {% endif %}
             </td>
             <td>
-                {% if producto.image_url %}
-                    <a href="{{ producto.image_url }}" target="_blank">Ver imagen</a>
+                {% if producto.photo_url %}
+                    <a href="{{ producto.photo_url }}" target="_blank">Ver imagen</a>
                 {% else %}
                     -
                 {% endif %}
             </td>
-            <td>{{ producto.stock }}</td>
+                        <td>{{ producto.stock }}</td>
         </tr>
         {% empty %}
         <tr>
