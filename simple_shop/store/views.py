@@ -12,6 +12,9 @@ import json
 from django import forms
 from django.contrib.auth.decorators import user_passes_test
 from .forms import CustomUserCreationForm
+from django.contrib import messages
+
+
 
 def signup(request):
     if request.method == 'POST':
@@ -26,15 +29,20 @@ def signup(request):
 
 @login_required
 def add_product(request):
+    # Solo permite acceso a admin o bodeguero
+    if not (request.user.is_superuser or request.user.is_staff):
+        messages.warning(request, "Solo usuarios autorizados pueden agregar productos.")
+        return redirect('product_list')
+
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Producto agregado correctamente.")
             return redirect('product_list')
     else:
         form = ProductForm()
     return render(request, 'store/add_product.html', {'form': form})
-
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'store/product_list.html', {'products': products})
