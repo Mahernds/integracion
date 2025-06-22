@@ -109,17 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-  const btnPagar = document.getElementById('btn-pagar');
-  const formEnvio = document.getElementById('form-envio');
-  const paypalContainer = document.getElementById('paypal-button-container');
-
-  if (btnPagar && formEnvio && paypalContainer) {
-      btnPagar.addEventListener('click', function() {
-          formEnvio.style.display = 'none';
-          paypalContainer.style.display = 'block';
-      });
-    }
 });
 </script>
 {% endblock %}
