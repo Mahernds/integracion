@@ -70,7 +70,7 @@
           <div class="invalid-feedback">Ingrese su dirección completa.</div>
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Continuar con el pago</button>
+          <button type="submit" id="btn-pagar" class="btn btn-primary">Continuar con el pago</button>
         </div>
       </form>
       <div id="paypal-button-container" class="mt-4" style="display: none;"></div>
@@ -108,6 +108,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+    }
+
+  const btnPagar = document.getElementById('btn-pagar');
+  const formEnvio = document.getElementById('form-envio');
+  const paypalContainer = document.getElementById('paypal-button-container');
+
+  if (btnPagar && formEnvio && paypalContainer) {
+      btnPagar.addEventListener('click', function() {
+          formEnvio.style.display = 'none';
+          paypalContainer.style.display = 'block';
+      });
     }
 });
 </script>

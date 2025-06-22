@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+{% block title %}Mis Compras - {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Mis Compras</h2>
+{% if compras %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Dirección</th>
+                <th>Detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+            <tr>
+                <td>{{ compra.fecha|date:"d/m/Y H:i" }}</td>
+                <td>${{ compra.total }}</td>
+                <td>{{ compra.direccion }}, {{ compra.comuna }}, {{ compra.region }}</td>
+                <td>
+                    <ul>
+                        {% for detalle in compra.detalles.all %}
+                        <li>{{ detalle.producto }} x{{ detalle.cantidad }} - ${{ detalle.precio }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="alert alert-info">No tienes compras registradas.</div>
+{% endif %}
+{% endblock %}
