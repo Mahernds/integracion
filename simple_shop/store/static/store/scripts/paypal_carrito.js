@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Renderiza el botón de PayPal SOLO cuando el formulario es válido
                 if (typeof paypal !== "undefined") {
+                    paypalContainer.innerHTML = ""; 
                     paypal.Buttons({
                         style: { color: 'blue', shape: 'pill', label: 'pay' },
+                        
                         createOrder: function(data, actions) {
                             const total = parseFloat(document.getElementById('carrito-total').textContent.replace(/\./g, '').replace(',', '.'));
                             return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
@@ -59,4 +61,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
